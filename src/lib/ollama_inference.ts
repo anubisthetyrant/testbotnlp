@@ -12,7 +12,8 @@ const hostUrl = jsonData.contents.trim();
 
 const ollama = new Ollama({
     fetch: (input: RequestInfo | URL , init?: RequestInit) => fetch(input, {...init, mode: 'cors', credentials: 'omit', headers: { 'Content-Type': 'application/json' }}),
-    host: hostUrl || "http://localhost:11434/",
+    // host: hostUrl || "http://localhost:11434/",
+    host: hostUrl
 })
 
 /*
