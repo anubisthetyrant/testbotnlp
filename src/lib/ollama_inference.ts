@@ -33,7 +33,7 @@ export const getChatCompletionStream = async (messages: ResultMessage[]): Promis
             
             temperature: 0.2,
             top_p: 0.4,
-            stop: ["["]
+            stop: ["[", "---"]
         }
     })
     return response;
