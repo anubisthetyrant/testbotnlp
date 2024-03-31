@@ -1,0 +1,38 @@
+[
+  {
+    "triggers": ["program 2"],
+    "answer": "implement word generation using Python and NLTK.\n\nPROGRAM:\nfor line in open(\"nlp.py\"):\nfor word in line.split():\nif word.endswith('ing'):\nprint(word)\nprint(len(word))"
+  },
+  {
+    "triggers": ["program 3"],
+    "answer": "To implement morphology using Python and NLTK.\n\nimport nltk\nfrom nltk.stem import PorterStemmer, LancasterStemmer, SnowballStemmer\nfrom nltk.tokenize import word_tokenize\n\nnltk.download('punkt')\n\ndef morphology_demo(word):\n    print(f\"Original Word: {word}\")\n\n    # Tokenize the word into individual tokens\n    tokens = word_tokenize(word)\n\n    # Apply different stemmers\n    porter_stemmer = PorterStemmer()\n    lancaster_stemmer = LancasterStemmer()\n    snowball_stemmer = SnowballStemmer('english')\n\n    porter_stemmed = [porter_stemmer.stem(token) for token in tokens]\n    lancaster_stemmed = [lancaster_stemmer.stem(token) for token in tokens]\n    snowball_stemmed = [snowball_stemmer.stem(token) for token in tokens]\n\n    print(f\"Porter Stemming: {porter_stemmed}\")\n    print(f\"Lancaster Stemming: {lancaster_stemmed}\")\n    print(f\"Snowball Stemming: {snowball_stemmed}\")\n\nif __name__ == \"__main__\":\n    word_to_process = \"running\"\n    morphology_demo(word_to_process)"
+  },
+  {
+    "triggers": ["program 4"],
+    "answer": "To implement N-Grams using Python and NLTK\n\nimport re\nfrom nltk.util import ngrams\ns =\"Machine learning is an important part of AI\"\"and AI is going to become inmporant for\ndaily functionong\"\ntokens=[token for token in s.split(\" \")]\noutput =list(ngrams(tokens,2))\nprint(output)"
+  },
+  {
+    "triggers": ["program 5"],
+    "answer": "N-GRAMS SMOOTHING\n\nfrom collections import Counter \nimport numpy as np  \ncorpus = \"the quick brown fox jumps over the lazy dog\"  \nunigrams = Counter(corpus.split()) \ndef get_ngrams(sentence, n): \n    return [tuple(sentence[i:i+n]) for i in range(len(sentence)-n+1)] \nbigrams = Counter(get_ngrams(corpus.split(), 2)) \ndef add_k_smoothing(ngram_counts, k, n_1gram_counts): \n    total_ngrams = sum(ngram_counts.values()) \n    vocabulary_size = len(n_1gram_counts) \n    denominator = total_ngrams + k*vocabulary_size \n    probabilities = {} \n    for ngram, count in ngram_counts.items(): \n        probabilities[ngram] = (count + k) / denominator \n    for ngram in set(n_1gram_counts.keys()) - set(ngram_counts.keys()): \n        probabilities[ngram] = k / denominator \n    return probabilities \nk = 1 \nbigram_probabilities = add_k_smoothing(bigrams, k, unigrams)  \nfor bigram, probability in bigram_probabilities.items(): \n    print(bigram, probability)"
+  },
+  {
+    "triggers": ["program 6"],
+    "answer": "To implement POS-Tagging: Hidden Markov Model using Python and NLTK\n\nimport nltk\nimport numpy as np\nimport pandas as pd\nimport random\nfrom sklearn.model_selection import train_test_split\nimport pprint, time\nnltk.download('treebank')\nnltk.download('universal_tagset')\nnltk_data = list(nltk.corpus.treebank.tagged_sents(tagset='universal'))\nprint(nltk_data[:2])"
+  },
+  {
+    "triggers": ["program 7"],
+    "answer": "To implement POS-Tagging: Viterbi Decoding using Python and NLTK\n\nimport nltk\nfrom nltk.corpus import brown\nimport nltk\nnltk.download('brown')\n\n\n# Training data\nsentences = brown.tagged_sents()[:5000]\n\n# Create tag frequency distribution and transition probability matrix\ntag_freq = nltk.FreqDist(tag for sentence in sentences for word, tag in sentence)\ntransition_prob = nltk.ConditionalFreqDist(\n    (tag1, tag2) for sentence in sentences for (_, tag1), (_, tag2) in nltk.bigrams(sentence))\n\n# Define Viterbi function\ndef viterbi(sentence, tag_freq, transition_prob):\n    # Initialize first word probabilities\n    v = [{}]\n    for tag in tag_freq:\n        v[0][tag] = {\"prob\": tag_freq[tag] / len(sentences), \"prev\": None}\n\n    # Recursion step\n    for i in range(1, len(sentence)):\n        v.append({})\n        for tag in tag_freq:\n            max_prob = max(v[i - 1][prev_tag][\"prob\"] * transition_prob[prev_tag][tag] * tag_freq[tag] / len(sentences)\n                           for prev_tag in tag_freq)\n            for prev_tag in tag_freq:\n                if v[i - 1][prev_tag][\"prob\"] * transition_prob[prev_tag][tag] * tag_freq[tag] / len(sentences) == max_prob:\n                    v[i][tag] = {\"prob\": max_prob, \"prev\": prev_tag}\n                    break\n\n    # Termination step\n    max_prob = max(v[-1][tag][\"prob\"] for tag in tag_freq)\n    current_tag = None\n    for tag, data in v[-1].items():\n        if data[\"prob\"] == max_prob:\n            current_tag = tag\n            break\n\n    # Backtracking\n    tags = [current_tag]\n    for i in range(len(v) - 1, 0, -1):\n        current_tag = v[i][current_tag][\"prev\"]\n        tags.append(current_tag)\n    tags.reverse()\n    return list(zip(sentence, tags))\n\n# Example usage\nsentence = \"The quick brown fox jumps over the lazy dog\".split()\npos_tags = viterbi(sentence, tag_freq, transition_prob)\nprint(pos_tags)"
+  },
+  {
+    "triggers": ["program 8"],
+    "answer": "To implement Building POS Tagger using Python and NLTK\n\nimport nltk\nprint(\"Adwin Paulji - 211211101006\")\nnltk.download('averaged_perceptron_tagger')\nnltk.download('punkt')\ntext=nltk.word_tokenize(\"And now for Everything completely Same\")\nprint(nltk.pos_tag(text))"
+  },
+  {
+    "triggers": ["program 9"],
+    "answer": "To implement Chunking code using Python and NLTK\n\nimport nltk\nsentence = [(\"the\", \"DT\"), (\"little\", \"JJ\"), (\"yellow\", \"JJ\"), (\"dog\", \"NN\"), (\"barked\", \"VBD\"),\n(\"at\", \"IN\"), (\"the\", \"DT\"), (\"cat\", \"NN\")]\ngrammar = \"NP: {<DT>?<JJ>*<NN>}\"\ncp = nltk.RegexpParser(grammar)\nresult = cp.parse(sentence)\nprint(result)\nresult.draw()"
+  },
+  {
+    "triggers": ["program 10"],
+    "answer": "To implement Building Chunkers code using Python and NLTK\n\nimport nltk\nnltk.download('averaged_perceptron_tagger')\nfrom nltk import pos_tag\nfrom nltk import RegexpParser\ntext =\"learn php from kaala42 and make study easy\".split()\nprint(\"After Split:\",text)\ntokens_tag = pos_tag(text)\nprint(\"After Token:\",tokens_tag)\npatterns= \"\"\"mychunk:{<NN.?>*<VBD.?>*<JJ.?>*<CC>?}\"\"\"\nchunker = RegexpParser(patterns)\nprint(\"After Regex:\",chunker)\noutput = chunker.parse(tokens_tag)\nprint(\"After Chunking\",output)"
+  }
+]

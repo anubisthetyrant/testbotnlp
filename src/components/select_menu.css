@@ -1,0 +1,27 @@
+
+.s-menu {
+    position: absolute;
+    display: inline-block;
+    bottom: 30px;
+    left: 40px;
+    background-color: #3d3d3d;
+    border-radius: 5px;
+    list-style: none;
+    width: 70%;
+}
+
+.s-menu li {
+    text-decoration: none;
+    margin-left: -30px;
+    margin-right: 20px;
+    margin: 10px 20px 10px -25px;
+    padding: 5px;
+}
+
+.s-menu-items {
+    cursor: pointer;
+}
+.s-menu-items:hover {
+    background-color: #545454;
+    border-radius: 5px;
+}

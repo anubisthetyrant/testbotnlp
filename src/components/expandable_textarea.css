@@ -1,0 +1,9 @@
+
+
+textarea::placeholder {
+    color: #ffffff82
+}
+
+ textarea:focus {
+    border: 1px solid #ffffff82 !important;
+}
